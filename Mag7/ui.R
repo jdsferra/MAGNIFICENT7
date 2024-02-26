@@ -11,6 +11,7 @@ dashboardPage(skin = 'blue', dashboardHeader(title='The Magnificent Seven (2020-
                                   menuItem("Percent Change in Prices", tabName = 'pct', icon = icon("percent")),
                                   menuItem("P/E Ratios", tabName = 'pe', icon = icon("divide")),
                                   menuItem("Market Cap", tabName = 'mc', icon = icon("square")),
+                                  menuItem("vs. World GDP's", tabName = 'gdp', icon = icon("earth-asia")),
                                   menuItem("About Me", tabName = 'me', icon = icon("address-book"))
                                 )),
               
@@ -81,7 +82,28 @@ dashboardPage(skin = 'blue', dashboardHeader(title='The Magnificent Seven (2020-
                             div('Source: Macrotrends.net'),
                           )
                        )
-                    ), 
+                    ),
+                  
+                  #World GDPs
+                  tabItem(tabName = 'gdp', h2("The Magnificent Seven's Market Cap Rivals World GDPs"),
+                          h6("The Magnificent 7's market cap eclipses many world GDPs, consistently placing fourth behind the USA, China, and the Euro Area."),
+                          h6("All breakdowns are calculated at year end (2024 is estimated for Feb '24)."),
+                          
+                          sidebarLayout(
+                            sidebarPanel(
+                              sliderInput("format2", "Select year:",
+                                          min = 2020, max = 2024,
+                                          value = 2020, step = 1,
+                                          sep = ""
+                              )
+                            ),
+                            
+                            mainPanel(
+                              wellPanel(fluidRow(column(12, plotOutput('gdp1', width = '100%')))),
+                              div('Source: IMF World Economic Outlook Database, Macrotrends.net'),
+                            )
+                          )
+                  ), 
 
 
                   #About Me

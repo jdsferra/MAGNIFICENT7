@@ -5,7 +5,7 @@ account: jdsferra
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 11331380
-bundleId: 8298883
+bundleId: 8299701
 url: https://jdsferra.shinyapps.io/Magnificent7/
 version: 1
 asMultiple: FALSE

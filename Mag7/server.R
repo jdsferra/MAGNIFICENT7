@@ -67,6 +67,35 @@ output$mc1 <- renderPlot({
   plot
 })
 
+#GDP
+gdpyearcheck <- eventReactive(input$format2, {
+  req(input$format2)
+  gdptoplot %>%
+    filter(Year == input$format2)
+})
+
+#possible adapt to show numbers
+# pivotyearcheck <- eventReactive(yearcheck(), {
+#   req(yearcheck())
+#   yearcheck() %>% pivot_longer(2:10, names_to = 'biz', values_to = 'marketcap') %>% group_by(biz) %>%
+#     mutate(fulllabel=paste(biz, paste0('$',marketcap,'T'), sep = '\n'))
+# })
+
+output$gdp1 <- renderPlot({
+  req(gdpyearcheck())
+  
+  GDPs <- gdpyearcheck() %>% 
+    ggplot() + geom_col(aes(x= reorder(Country, -GDP), y=GDP, fill = GDP)) + 
+    labs(title = "Mag7 Market Cap Rivals World GDPs", x = "Country", y = "Billions USD") +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position = 'none')
+  
+  GDPs
+})
+
+
+
+
+
 
   
   
