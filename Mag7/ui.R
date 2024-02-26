@@ -1,3 +1,4 @@
+library(treemap)
 library(plotly)
 dashboardPage(skin = 'blue', dashboardHeader(title='The Magnificent Seven (2020-2024)', titleWidth = 380),
               
@@ -8,6 +9,8 @@ dashboardPage(skin = 'blue', dashboardHeader(title='The Magnificent Seven (2020-
                                   menuItem("Intro", tabName = 'intro', icon = icon("house")),
                                   menuItem("Stock Prices 2020-2024", tabName = "prices", icon = icon("dollar-sign")),
                                   menuItem("Percent Change in Prices", tabName = 'pct', icon = icon("percent")),
+                                  menuItem("P/E Ratios", tabName = 'pe', icon = icon("divide")),
+                                  menuItem("Market Cap", tabName = 'mc', icon = icon("square")),
                                   menuItem("About Me", tabName = 'me', icon = icon("address-book"))
                                 )),
               
@@ -19,15 +22,15 @@ dashboardPage(skin = 'blue', dashboardHeader(title='The Magnificent Seven (2020-
                   div(img(src='Artboard 1.png', height="100%", width="100%"), style="text-align: left;")
                   ),
                   
-                  #
+                  #Closing Prices
                   tabItem(tabName = 'prices', h2('Closing Prices 2020-2024'),
                           
                             
                             mainPanel(
-                              fluidRow(column(12, plotlyOutput('ts1')),
+                              wellPanel(fluidRow(plotlyOutput('ts1'))),
+                              div('Source: Google Finance'),
                               ),
-                            )
-                          ),
+                            ),
                   
                   #Percent Change
                   
@@ -43,15 +46,42 @@ dashboardPage(skin = 'blue', dashboardHeader(title='The Magnificent Seven (2020-
                              )
                            ),
                            mainPanel(
-                             plotlyOutput("pctplot")
+                             wellPanel(plotlyOutput("pctplot")),
+                             div('Source: Google Finance', style ='textalign:right'),
                              )
                            )
                           ),
-
-
-
-
-
+                  
+                  #P/E Ratios
+                  tabItem(tabName = 'pe', h2('Quarterly Reported P/E Ratios 2020-2024'),
+                  
+                          mainPanel(
+                            wellPanel(fluidRow(plotlyOutput('pe1'))),
+                            div('Source: Macrotrends.net, Multpl.com'),
+                          ),
+                  ),
+                  
+                  #Market Cap
+                  tabItem(tabName = 'mc', h2('The Magnificent Seven Dominate S&P500 Market Cap'),
+                          h6("All breakdowns are calculated at year end (2024 is estimated for Feb '24)."),
+                          h6("As the S&P 500's Market Cap has grown from $26T to $40T, so has the Magnificent 7's share of it, with their\
+                          share currently hovering at around one third."),
+                          
+                          sidebarLayout(
+                            sidebarPanel(
+                              sliderInput("format", "Select year:",
+                                          min = 2019, max = 2024,
+                                          value = 2019, step = 1,
+                                          sep = ""
+                                          )
+                            ),
+                          
+                          mainPanel(
+                            wellPanel(fluidRow(column(12, plotOutput('mc1')))),
+                            div('Source: Macrotrends.net'),
+                          )
+                       )
+                    ), 
 
 
                   #About Me

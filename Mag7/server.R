@@ -33,8 +33,41 @@ output$pctplot <- renderPlotly({
   req(addpctchg())
   ts_plot(addpctchg(), title = 'Mag7 % Change in Price', Xtitle = 'Date', Ytitle = '% Change in Price')
 })
+
+#P/E Ratios
+
+output$pe1 <- renderPlotly({
+ts_plot(peratios, title = 'P/E Ratios of Mag7 vs. S&P500 (Reported Quarterly)', Xtitle = 'Date', Ytitle = 'Stock Price/Earnings per share', slider = TRUE)
+})
+
   
+#Market Cap
+yearcheck <- eventReactive(input$format, {
+  req(input$format)
+  mc %>%
+    filter(YearEnd == input$format)
+})
+
+pivotyearcheck <- eventReactive(yearcheck(), {
+  req(yearcheck())
+  yearcheck() %>% pivot_longer(2:10, names_to = 'biz', values_to = 'marketcap') %>% group_by(biz) %>%
+  mutate(fulllabel=paste(biz, paste0('$',marketcap,'T'), sep = '\n'))
+})
+
+output$mc1 <- renderPlot({
+  req(pivotyearcheck())
   
+  plot <- treemap(pivotyearcheck()[-9, ], index = 'fulllabel', vSize = 'marketcap',
+                  palette = rep('#008FDF', times = 8), fontcolor.labels = '#000000', border.col = 'gray',
+                  title = paste0('S&P 500 ', input$format, ' Market Cap ($', sum(yearcheck()$SP), 'T)'),
+                  title.legend = "Caption goes here",
+                  padding.labels = c(5, 5, 50, 5),
+                  aspRatio = 0.8)
+  
+  plot
+})
+
+
   
   
   #About Me
