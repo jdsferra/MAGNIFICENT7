@@ -26,19 +26,19 @@ dashboardPage(skin = 'blue', dashboardHeader(title='The Magnificent Seven (2015-
                 This means that the Seven's recent success has given them a significant share of the overall market cap\
                 and may be artificially inflating the S&P 500's overall performance.\
                 The index, representing 503 businesses, is usually regarded as a general indicator for economic health. The Seven's\
-                dominance raises concerns for investors and businesses alike. Is the sucess of the Seven masking an otherwise stagnating S&P 500?\
+                dominance raises concerns for investors and businesses alike. Is the success of the Seven masking an otherwise stagnating S&P 500?\
                 Is a business that has to report their progress to the SEC with respect to the S&P making a flawed comparison? Examine these questions through the plots and\
                 data provided in this R Shiny App."),
-          div(img(src='mag7logo.png', height = '60%', width = '60%'), style = 'text-align: center;')
+          div(img(src='mag7logo.png', height = '50%', width = '50%'), style = 'text-align: center;')
               ),
                   
         #Closing Prices
         tabItem(tabName = 'prices', h3('Closing Prices vs. % Price Change'),
-                h6("Price data vs. percent change in price. Specifying the starting date can create vastly\
-                different plots, which serve as important visualizations in news coverage of the stock market. The second tab allows individual stocks and calculates\
+                h6("Specifying the starting date can create vastly different plots, which serve as important visualizations\
+                in news coverage of the stock market. The second tab allows individual stocks and calculates\
                 the standard deviation from start date to present, a common measure of stock volatility.\
                 Significant dates to isolate here may be early 2020 during the rise of Covid-19, early 2023 when\
-                Jim Cramer popularized the term 'Magnificent Seven', or early 2024 as Nvidia skyrockets as Cramer\
+                Jim Cramer popularized the term 'Magnificent Seven', or early 2024 as Nvidia skyrockets while Cramer\
                 suggested dropping Tesla from this group and instead supporting the 'Super Six'."),
                 
             #Tab box  
@@ -110,7 +110,7 @@ dashboardPage(skin = 'blue', dashboardHeader(title='The Magnificent Seven (2015-
                                               ),
                                  tags$div(style = "border: 5px solid #ccc; padding: 10px; margin-top: 10px; background-color: #f9f9f9; font-size: 14px;",
                                    "Notice the change in this chart between 2019 and 2020. Many countries' economies stagnated during Covid. The Seven, though, had\
-                                   significant stakes in software, telecommunications equipment, and retail via the Internet, which all received a significant boost\
+                                   stakes in software, telecommunications equipment, and retail via the Internet, which all received a significant boost\
                                    during the pandemic."
                                         )
                                   ),                          

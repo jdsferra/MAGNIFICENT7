@@ -191,7 +191,7 @@ shinyServer(function(input, output) {
     
     GDPs <- gdpyearcheck() %>% 
       ggplot() + geom_col(aes(x= reorder(Country, -GDP), y=GDP, fill = GDP)) +
-      labs(title = "Mag7 Market Cap Rivals World GDPs", x = "Country", y = "Billions USD") +
+      labs(title = paste0(input$format2, ": Mag7 Market Cap Rivals World GDPs"), x = "Country", y = "Billions USD") +
       theme(axis.text.x = element_text(angle = 45, hjust = 1), legend.position = 'none', panel.background = element_rect(fill = '#708090')) +
       scale_x_discrete(labels = format_labels) +
       scale_y_continuous(limits = c(0, 30000))
